@@ -1,8 +1,9 @@
 export const dasherize = (str: unknown): string =>
   String(typeof str === 'symbol' ? str.description : str)
-    .replace(/([A-Z]($|[a-z]))/g, '-$1')
+    .replace(/([A-Z]+)([A-Z][a-z])/g, '$1-$2')
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
     .replace(/--/g, '-')
-    .replace(/^-|-$/, '')
+    .replace(/^-|-$/g, '')
     .toLowerCase()
 
 export const mustDasherize = (str: unknown, type = 'property'): string => {
